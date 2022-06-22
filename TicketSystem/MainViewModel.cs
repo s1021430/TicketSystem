@@ -66,8 +66,8 @@ namespace TicketSystem.Presentation
             set => SetProperty(ref name, value, true);
         }
 
-        private TicketViewModel selectedTicket;
-        public TicketViewModel SelectedTicket
+        private TicketViewModel? selectedTicket;
+        public TicketViewModel? SelectedTicket
         {
             get => selectedTicket;
             set => SetProperty(ref selectedTicket, value, true);
@@ -97,15 +97,47 @@ namespace TicketSystem.Presentation
         public RelayCommand LoginCommand { get; }
         public RelayCommand ResolveCommand { get; }
         public RelayCommand ReportCommand { get; }
+        public RelayCommand DeleteCommand { get; }
+        public RelayCommand EditCommand { get; }
         public MainViewModel()
         {
             OpenLoginDialogCommand = new RelayCommand(OpenLoginDialog);
             LoginCommand = new RelayCommand(Login);
             ResolveCommand = new RelayCommand(Resolve);
             ReportCommand = new RelayCommand(Report);
+            DeleteCommand = new RelayCommand(Delete);
+            EditCommand = new RelayCommand(Edit);
             DialogContent = new LoginView(this);
             IsDialogOpen = true;
-            UpdateUI();
+            UpdateUi();
+        }
+
+        private void Edit()
+        {
+            if (SelectedTicket == null)
+            {
+                Message = "Must select ticket to edit.";
+                return;
+            }
+            var editResult = ticketsService.Edit(SelectedTicket);
+            Message = editResult.Message;
+            if (!editResult.Success) 
+                SelectedTicket = (TicketViewModel)ticketsService.GeTicket(SelectedTicket.Id);
+
+        }
+
+        private void Delete()
+        {
+            if (SelectedTicket == null)
+            {
+                Message = "Must select ticket to delete.";
+                return;
+            }
+            var deleteResult = ticketsService.Delete(SelectedTicket);
+            Message = deleteResult.Message;
+            if (!deleteResult.Success) return;
+            Tickets = new ObservableCollection<TicketViewModel>(ticketsService.GeTickets().Select(_ => (TicketViewModel)_));
+            SelectedTicket = Tickets.Last();
         }
 
         private void OpenLoginDialog()
@@ -126,6 +158,11 @@ namespace TicketSystem.Presentation
 
         private void Resolve()
         {
+            if (SelectedTicket == null)
+            {
+                Message = "Must select ticket to resolve.";
+                return;
+            }
             var resolveResult = ticketsService.Resolve(SelectedTicket.Id, currentUser);
             Message = resolveResult.Message;
             if (!resolveResult.Success) return;
@@ -140,10 +177,10 @@ namespace TicketSystem.Presentation
             if (!loginResult.Success) return;
             IsDialogOpen = false;
             currentUser = (UserViewModel)UsersServiceProvider.GetInstance().CurrentUser;
-            UpdateUI();
+            UpdateUi();
         }
 
-        private void UpdateUI()
+        private void UpdateUi()
         {
             switch (SelectedRole)
             {

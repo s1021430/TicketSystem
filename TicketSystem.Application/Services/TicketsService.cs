@@ -53,14 +53,36 @@ namespace TicketSystem.Application.Services
             }
         }
 
-        public ServiceResult Edit(int id)
+        public ServiceResult Edit(Ticket selectedTicket)
         {
-            throw new NotImplementedException();
+            var validateResult = validator.ValidateTicketEdit(selectedTicket);
+            if (validateResult != TicketsValidationError.Success)
+                return new ServiceResult(false, $"Ticket edit failed({validateResult})!");
+            repository.Update(selectedTicket);
+            return new ServiceResult(true, "Ticket edited!");
         }
 
         public List<Ticket> GeTickets()
         {
             return repository.Get();
+        }
+
+        public Ticket GeTicket(int id)
+        {
+            return repository.Get(id);
+        }
+
+        public ServiceResult Delete(Ticket selectedTicket)
+        {
+            try
+            {
+                repository.Delete(selectedTicket);
+                return new ServiceResult(true, "Ticket deleted!");
+            }
+            catch (Exception e)
+            {
+                return new ServiceResult(false, e.Message);
+            }
         }
     }
 }

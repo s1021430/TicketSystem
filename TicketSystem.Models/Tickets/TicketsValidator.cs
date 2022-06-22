@@ -7,6 +7,7 @@ namespace TicketSystem.Domain.Tickets
     {
         public TicketsValidationError ValidateTicketCreate(Ticket ticket);
         public TicketsValidationError ValidateTicketResolve(Ticket ticket);
+        public TicketsValidationError ValidateTicketEdit(Ticket ticket);
     }
 
     public class TicketsValidator : ITicketsValidator

@@ -8,7 +8,7 @@
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:user="clr-namespace:TicketSystem.Domain.User;assembly=TicketSystem.Domain"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="TicketSystem" Height="600" Width="800">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
@@ -35,12 +35,8 @@
                             <DataTemplate DataType="viewModels:TicketViewModel">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Summary : " FontSize="16"/>
-                                        <TextBlock Text="{Binding Summary}" FontSize="16"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Description : " FontSize="16"/>
-                                        <TextBlock Text="{Binding Description}" FontSize="16"/>
+                                        <TextBlock Text="Name : " FontSize="16"/>
+                                        <TextBlock Text="{Binding Name}" FontSize="16"/>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -75,29 +71,65 @@
                         Foreground="Snow" Cursor="Hand" Command="{Binding DataContext.ResolveCommand,ElementName=MainGrid}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                         Margin="0,0,10,10"/>
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="1" Visibility="{Binding BugCreateEnabled,Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="55"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" Margin="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Summary :" FontSize="24" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BugSummary}" FontSize="24" Cursor="Arrow" Width="400" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" FontSize="24" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BugDescription}" FontSize="24" Cursor="Arrow" VerticalAlignment="Center"/>
-                </Grid>
-                <Button Grid.Row="1" Content="Report Bug" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" HorizontalAlignment="Right"
-                        Foreground="Snow" Cursor="Hand" Command="{Binding ReportCommand}" Background="IndianRed" BorderBrush="IndianRed"
-                        Margin="0,0,10,0"/>
-            </Grid>
+            <TabControl Grid.Row="0" Grid.Column="1"
+                        Visibility="{Binding DataContext.BugCreateEnabled,ElementName=MainGrid, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <TabItem Header="Bug Report">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55"/>
+                                <RowDefinition Height="55"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Summary :" FontSize="24" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding BugSummary}" FontSize="24" Cursor="Arrow" Width="400" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" FontSize="24" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BugDescription}" FontSize="24" Cursor="Arrow" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Button Grid.Row="1" Content="Report Bug" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" HorizontalAlignment="Right"
+                                Foreground="Snow" Cursor="Hand" Command="{Binding ReportCommand}" Background="IndianRed" BorderBrush="IndianRed"
+                                Margin="0,0,10,0"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Ticket Edit" DataContext="{Binding SelectedTicket}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" FontSize="24" Width="180" VerticalAlignment="Center" />
+                        <TextBlock Text="Summary :" FontSize="24" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding Summary}" FontSize="24" Cursor="Arrow" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" />
+                        <TextBlock Text="Description :" FontSize="24" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding Description}" FontSize="24" Cursor="Arrow" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" />
+                        <TextBlock Text="Status :" FontSize="24" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding Status}" FontSize="24" Cursor="Arrow" Grid.Column="1"
+                                     VerticalAlignment="Center" Grid.Row="3" />
+                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Delete" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" HorizontalAlignment="Right"
+                                    Foreground="Snow" Cursor="Hand" Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}" Background="DimGray" BorderBrush="DimGray"
+                                    Margin="0,0,10,0"/>
+                            <Button Content="Edit" Style="{StaticResource MaterialDesignRaisedAccentButton}" Width="150" HorizontalAlignment="Right"
+                                    Foreground="Snow" Cursor="Hand" Command="{Binding DataContext.EditCommand,ElementName=MainGrid}"
+                                    Margin="10,0,10,0"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
             <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Message}" FontSize="24" VerticalAlignment="Top" 
                        HorizontalAlignment="Left" Foreground="IndianRed" Margin="10,0,10,10" TextWrapping="Wrap"/>
         </Grid>

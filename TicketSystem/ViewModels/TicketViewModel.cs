@@ -15,7 +15,7 @@ namespace TicketSystem.Presentation.ViewModels
         }
         public static implicit operator Ticket(TicketViewModel viewModel)
         {
-            return new Ticket(viewModel.Type)
+            var ticket = new Ticket(viewModel.Type)
             {
                 Status = viewModel.Status,
                 Summary = viewModel.Summary,
@@ -23,6 +23,8 @@ namespace TicketSystem.Presentation.ViewModels
                 Creator = viewModel.Creator,
                 Assignee = viewModel.Assignee
             };
+            ticket.SetId(viewModel.Id);
+            return ticket;
         }
         public int Id { get; }
 
