@@ -5,9 +5,16 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketSystem.Presentation", "TicketSystem\TicketSystem.Presentation.csproj", "{403095E6-C436-43DC-A4C3-1F7801EADAD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSystem.Domain", "TicketSystem.Models\TicketSystem.Domain.csproj", "{B42E4373-FEAF-40F9-BF38-9C73EC8A813A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketSystem.Domain", "TicketSystem.Models\TicketSystem.Domain.csproj", "{B42E4373-FEAF-40F9-BF38-9C73EC8A813A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSystem.Application", "TicketSystem.Application\TicketSystem.Application.csproj", "{96C3F5F7-DEA1-4AB2-9201-AFC2DC225D7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketSystem.Application", "TicketSystem.Application\TicketSystem.Application.csproj", "{96C3F5F7-DEA1-4AB2-9201-AFC2DC225D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketSystem.Infrastructure", "TicketSystem.Infrastructure\TicketSystem.Infrastructure.csproj", "{5ADA475E-BAED-4EFA-8EDB-2BE3C191A77D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CBA278A2-DC2F-4AA4-AA87-63DEF87C5CE2}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +34,10 @@ Global
 		{96C3F5F7-DEA1-4AB2-9201-AFC2DC225D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96C3F5F7-DEA1-4AB2-9201-AFC2DC225D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96C3F5F7-DEA1-4AB2-9201-AFC2DC225D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ADA475E-BAED-4EFA-8EDB-2BE3C191A77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ADA475E-BAED-4EFA-8EDB-2BE3C191A77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ADA475E-BAED-4EFA-8EDB-2BE3C191A77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ADA475E-BAED-4EFA-8EDB-2BE3C191A77D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

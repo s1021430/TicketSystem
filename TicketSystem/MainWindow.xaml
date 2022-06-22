@@ -8,15 +8,9 @@
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:user="clr-namespace:TicketSystem.Domain.User;assembly=TicketSystem.Domain"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <ObjectDataProvider x:Key="users" MethodName="GetValues"
-                            ObjectType="{x:Type sys:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="user:Role"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
     </Window.Resources>
     <materialDesign:DialogHost
         IsOpen="{Binding IsDialogOpen}"
@@ -25,6 +19,10 @@
         OverlayBackground="DarkGray"
         DialogTheme="Inherit">
         <Grid x:Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="130"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="210"/>
                 <ColumnDefinition Width="*"/>
@@ -54,7 +52,7 @@
                         HorizontalAlignment="Left" Margin="10,10,0,10"/>
             </StackPanel>
             <Grid Grid.Row="0" Grid.Column="1" DataContext="{Binding SelectedTicket}"
-                  Visibility="{Binding DataContext.BugResolveEnabled,ElementName=MainGrid, Converter={StaticResource BooleanToVisibilityConverter}}">
+                  Visibility="{Binding DataContext.BugResolveEnabled,ElementName=MainGrid, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55"/>
                     <RowDefinition Height="55"/>
@@ -77,7 +75,7 @@
                         Foreground="Snow" Cursor="Hand" Command="{Binding DataContext.ResolveCommand,ElementName=MainGrid}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                         Margin="0,0,10,10"/>
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="1" Visibility="{Binding BugCreateEnabled,Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Grid.Row="0" Grid.Column="1" Visibility="{Binding BugCreateEnabled,Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="55"/>
@@ -100,7 +98,8 @@
                         Foreground="Snow" Cursor="Hand" Command="{Binding ReportCommand}" Background="IndianRed" BorderBrush="IndianRed"
                         Margin="0,0,10,0"/>
             </Grid>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Message}" FontSize="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="IndianRed" Margin="10,0,10,10"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Message}" FontSize="24" VerticalAlignment="Top" 
+                       HorizontalAlignment="Left" Foreground="IndianRed" Margin="10,0,10,10" TextWrapping="Wrap"/>
         </Grid>
     </materialDesign:DialogHost>
 </Window>

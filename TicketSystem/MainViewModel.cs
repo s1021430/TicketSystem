@@ -7,7 +7,6 @@ using Microsoft.Toolkit.Mvvm.Input;
 using TicketSystem.Application;
 using TicketSystem.Domain.Tickets;
 using TicketSystem.Domain.User;
-using TicketSystem.Presentation.Login;
 using TicketSystem.Presentation.ViewModels;
 
 namespace TicketSystem.Presentation
@@ -16,7 +15,7 @@ namespace TicketSystem.Presentation
     {
         private readonly IUsersService usersService = UsersServiceProvider.GetInstance().UsersService;
         private readonly ITicketsService ticketsService = TicketsServiceProvider.GetInstance().TicketsService;
-        private UserViewModel currentUser = null;
+        private UserViewModel currentUser;
 
         private bool bugResolveEnabled;
         public bool BugResolveEnabled
@@ -67,7 +66,7 @@ namespace TicketSystem.Presentation
             set => SetProperty(ref name, value, true);
         }
 
-        private TicketViewModel selectedTicket = null;
+        private TicketViewModel selectedTicket;
         public TicketViewModel SelectedTicket
         {
             get => selectedTicket;

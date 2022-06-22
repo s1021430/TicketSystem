@@ -23,6 +23,7 @@
         PermissionDenied,
         SummaryEmpty,
         DescriptionEmpty,
+        OnlyOpenedCanBeResolved
     }
 
     public enum TicketsStatus

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace TicketSystem.Domain
+namespace TicketSystem.Infrastructure.Repositories
 {
     public interface IRepository<T>
     {
-        void Load();
-        void Save();
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);

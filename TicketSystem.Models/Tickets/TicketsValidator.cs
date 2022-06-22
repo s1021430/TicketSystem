@@ -32,6 +32,7 @@ namespace TicketSystem.Domain.Tickets
             ticketsResolveRules = new List<Specification<TicketsValidationError, Ticket>>
             {
                 new(TicketsValidationError.PermissionDenied, new TicketResolvePermissionRule()),
+                new(TicketsValidationError.OnlyOpenedCanBeResolved, new TicketResolveStatusRule()),
             };
         }
 

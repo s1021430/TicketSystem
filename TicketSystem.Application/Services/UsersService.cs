@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TicketSystem.Domain;
 using TicketSystem.Domain.User;
+using TicketSystem.Infrastructure.Repositories;
 
 namespace TicketSystem.Application.Services
 {

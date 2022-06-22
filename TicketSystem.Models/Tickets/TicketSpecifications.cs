@@ -59,4 +59,17 @@ namespace TicketSystem.Domain.Tickets
             }
         }
     }
+
+    public class TicketResolveStatusRule : CompositeSpecification<Ticket>
+    {
+        public override bool IsSatisfiedBy(Ticket ticket)
+        {
+            return ticket.Status switch
+            {
+                TicketsStatus.Opened => true,
+                TicketsStatus.Resolved => false,
+                _ => throw new ArgumentOutOfRangeException($"Ticket status({ticket.Status}) undefined.")
+            };
+        }
+    }
 }

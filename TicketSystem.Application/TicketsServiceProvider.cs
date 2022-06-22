@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TicketSystem.Application.Repositories;
-using TicketSystem.Application.Services;
+﻿using TicketSystem.Application.Services;
 using TicketSystem.Domain.Tickets;
+using TicketSystem.Infrastructure.Repositories;
 
 namespace TicketSystem.Application
 {
@@ -15,7 +12,7 @@ namespace TicketSystem.Application
             return instance ??= new TicketsServiceProvider();
         }
 
-        public ITicketsService TicketsService;
+        public readonly ITicketsService TicketsService;
         public TicketsServiceProvider()
         {
             var validator = new TicketsValidator();

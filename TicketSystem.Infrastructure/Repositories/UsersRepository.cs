@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using TicketSystem.Domain;
 using TicketSystem.Domain.User;
 
-namespace TicketSystem.Application.Repositories
+namespace TicketSystem.Infrastructure.Repositories
 {
     public class UsersRepository : IRepository<User>
     {

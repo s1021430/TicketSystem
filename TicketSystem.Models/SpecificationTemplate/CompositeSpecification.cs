@@ -69,18 +69,4 @@ namespace TicketSystem.Domain.SpecificationTemplate
             return !spec.IsSatisfiedBy(candidate);
         }
     }
-
-    public class ExpressionSpecification<T> : CompositeSpecification<T>
-    {
-        private readonly Func<T, bool> expression;
-        public ExpressionSpecification(Func<T, bool> expression)
-        {
-            this.expression = expression;
-        }
-
-        public override bool IsSatisfiedBy(T candidate)
-        {
-            return expression(candidate);
-        }
-    }
 }

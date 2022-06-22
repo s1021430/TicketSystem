@@ -12,10 +12,11 @@ namespace TicketSystem.Presentation.ViewModels
             return new UserViewModel(data);
         }
 
-        public static implicit operator User(UserViewModel viewModel)
+        public static implicit operator User(UserViewModel? viewModel)
         {
-            return viewModel == null ? null : new User(viewModel.Role, viewModel.Id);
+            return (viewModel is null ? null : new User(viewModel.Role, viewModel.Id))!;
         }
+
         public Role Role;
         public int Id;
         public UserViewModel(User user)

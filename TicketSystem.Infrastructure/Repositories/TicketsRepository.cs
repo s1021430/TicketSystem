@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TicketSystem.Domain;
 using TicketSystem.Domain.Tickets;
 
-namespace TicketSystem.Application.Repositories
+namespace TicketSystem.Infrastructure.Repositories
 {
     public class TicketsRepository : IRepository<Ticket>
     {
@@ -13,17 +12,6 @@ namespace TicketSystem.Application.Repositories
         public TicketsRepository()
         {
             tickets = new List<Ticket>();
-            Load();
-        }
-
-        public void Load()
-        {
-
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
         }
 
         public void Add(Ticket entity)

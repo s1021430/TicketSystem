@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TicketSystem.Application.Repositories;
-using TicketSystem.Application.Services;
+﻿using TicketSystem.Application.Services;
 using TicketSystem.Domain;
 using TicketSystem.Domain.User;
+using TicketSystem.Infrastructure.Repositories;
 
 namespace TicketSystem.Application
 {
@@ -17,7 +14,7 @@ namespace TicketSystem.Application
         }
 
         public User CurrentUser;
-        public IUsersService UsersService;
+        public readonly IUsersService UsersService;
         public UsersServiceProvider()
         {
             IUsersValidator validator = new UsersValidator();

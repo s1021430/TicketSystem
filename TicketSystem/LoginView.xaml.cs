@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
-namespace TicketSystem.Presentation.Login
+namespace TicketSystem.Presentation
 {
     /// <summary>
     /// LoginView.xaml 的互動邏輯
