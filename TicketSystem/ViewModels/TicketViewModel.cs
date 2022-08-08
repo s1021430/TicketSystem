@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using TicketSystem.Application;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using TicketSystem.Domain.Tickets;
 
 namespace TicketSystem.Presentation.ViewModels

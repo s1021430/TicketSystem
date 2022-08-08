@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TicketSystem.Infrastructure\TicketSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\TicketSystem.Models\TicketSystem.Domain.csproj" />
   </ItemGroup>
